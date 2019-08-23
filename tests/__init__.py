@@ -16,9 +16,9 @@ logging.basicConfig(level=logging.DEBUG)
 DIR = dirname(__file__)
 ODOO_PREFIX = ("odoo", "--stop-after-init", "--workers=0")
 ODOO_VERSIONS = frozenset(environ.get(
-    "DOCKER_TAG", "8.0 9.0 10.0 11.0 12.0").split())
+    "DOCKER_TAG", "7.0 8.0 9.0 10.0 11.0 12.0").split())
 PG_VERSIONS = frozenset(environ.get(
-    "PG_VERSIONS", "10").split())
+    "PG_VERSIONS", "11").split())
 SCAFFOLDINGS_DIR = join(DIR, "scaffoldings")
 
 
@@ -95,7 +95,7 @@ class ScaffoldingCase(unittest.TestCase):
             self.compose_test(
                 project_dir,
                 dict(sub_env, DBNAME="prod"),
-                ("test", "-e", "auto/addons/website"),
+                ("test", "-e", "auto/addons/web"),
                 ("test", "-e", "auto/addons/private_addon"),
                 ("bash", "-c",
                  'test "$(addons list -p)" == disabled_addon,private_addon'),
@@ -107,7 +107,7 @@ class ScaffoldingCase(unittest.TestCase):
             self.compose_test(
                 project_dir,
                 dict(sub_env, DBNAME="limited_private"),
-                ("test", "-e", "auto/addons/website"),
+                ("test", "-e", "auto/addons/web"),
                 ("test", "!", "-e", "auto/addons/private_addon"),
                 ("bash", "-c", 'test -z "$(addons list -p)"'),
                 ("bash", "-c",
@@ -118,13 +118,13 @@ class ScaffoldingCase(unittest.TestCase):
             self.compose_test(
                 project_dir,
                 dict(sub_env, DBNAME="limited_core"),
-                ("test", "!", "-e", "auto/addons/website"),
+                ("test", "!", "-e", "auto/addons/web"),
                 ("test", "!", "-e", "auto/addons/private_addon"),
                 ("bash", "-c", 'test -z "$(addons list -p)"'),
                 ("bash", "-c", 'test "$(addons list -c)" == crm,sale'),
             )
         # Skip Odoo versions that don't support __manifest__.py files
-        for sub_env in matrix(odoo_skip={"8.0", "9.0"}):
+        for sub_env in matrix(odoo_skip={"7.0", "8.0", "9.0"}):
             self.compose_test(
                 project_dir,
                 dict(sub_env, DBNAME="prod"),
@@ -215,16 +215,16 @@ class ScaffoldingCase(unittest.TestCase):
             ("click-odoo-update",),
         )
         smallest_dir = join(SCAFFOLDINGS_DIR, "smallest")
-        for sub_env in matrix(odoo_skip={"8.0"}):
+        for sub_env in matrix(odoo_skip={"7.0", "8.0"}):
             self.compose_test(
                 smallest_dir, sub_env, *commands,
                 ("python", "-c", "import watchdog"),
             )
-        for sub_env in matrix(odoo={"8.0"}):
+        for sub_env in matrix(odoo={"7.0", "8.0"}):
             self.compose_test(
                 smallest_dir, sub_env,
-                # Odoo 8.0 does not autocreate the database
-                ("psql", "-d", "postgres", "-c", "create database prod"),
+                # Odoo <= 8.0 does not autocreate the database
+                ("createdb",),
                 *commands
             )
 
