@@ -22,10 +22,13 @@ except ImportError:
     parser = RawConfigParser()
 
 ODOO_VERSION = os.environ.get("ODOO_VERSION")
-TARGET_FILE = os.environ.get("OPENERP_SERVER", "/opt/odoo/auto/odoo.conf")
+odoo_auto_conf_path = os.path.join(os.environ["ODOO_WORK_DIR"], "auto/odoo.conf")
+odoo_common_conf_d_path = os.path.join(os.environ["ODOO_WORK_DIR"], "common/conf.d")
+odoo_custom_conf_d_path = os.path.join(os.environ["ODOO_WORK_DIR"], "custom/conf.d")
+TARGET_FILE = os.environ.get("OPENERP_SERVER", odoo_auto_conf_path)
 if ODOO_VERSION not in {"8.0", "9.0"}:
     TARGET_FILE = os.environ.get("ODOO_RC", TARGET_FILE)
-CONFIG_DIRS = ("/opt/odoo/common/conf.d", "/opt/odoo/custom/conf.d")
+CONFIG_DIRS = (odoo_common_conf_d_path, odoo_custom_conf_d_path)
 CONFIG_FILES = []
 
 # Read all configuraiton files found in those folders

@@ -9,8 +9,8 @@ from subprocess import check_output
 import yaml
 
 # Constants needed in scripts
-CUSTOM_DIR = "/opt/odoo/custom"
-AUTO_DIR = "/opt/odoo/auto"
+CUSTOM_DIR = os.path.join(os.environ["ODOO_WORK_DIR"], "custom")
+AUTO_DIR = os.path.join(os.environ["ODOO_WORK_DIR"], "auto")
 ADDONS_DIR = os.path.join(AUTO_DIR, 'addons')
 SRC_DIR = os.path.join(CUSTOM_DIR, 'src')
 

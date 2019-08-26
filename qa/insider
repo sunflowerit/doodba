@@ -12,6 +12,8 @@ from tempfile import mkstemp, NamedTemporaryFile
 
 from doodbalib import logger
 
+qa_path = os.path.join(os.environ["ODOO_WORK_DIR"], "qa/artifacts")
+
 # Define CLI options
 parser = ArgumentParser(
     description="Execute some code in this container's QA environment.")
@@ -53,8 +55,8 @@ finally:
     os.unlink(executable.name)
 
     artifacts_zip_path = mkstemp()[1]
-    logger.debug("Zipping /qa/artifacts in %s.zip", artifacts_zip_path)
-    shutil.make_archive(artifacts_zip_path, "zip", "/qa/artifacts")
+    logger.debug("Zipping %s in %s.zip", (qa_path, artifacts_zip_path))
+    shutil.make_archive(artifacts_zip_path, "zip", qa_path)
     artifacts_zip_path += ".zip"
     with open(artifacts_zip_path, "rb") as zip_fd:
         if sys.version_info >= (3,):
