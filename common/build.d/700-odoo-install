@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-src=/opt/odoo/custom/src/odoo
-dst=/usr/local/bin/odoo
+src=$ODOO_WORK_DIR/custom/src/odoo
+dst=$ODOO_WORK_DIR/bin
 log INFO Installing Odoo from $src
 
 # For development you could want to avoid installing Odoo to speed up build
@@ -11,18 +11,26 @@ if [ "$PIP_INSTALL_ODOO" == true ]; then
     if [ "$ODOO_VERSION" == "8.0" ]; then
         args="$args --no-deps"
     fi
-    pip install $args --editable $src
+    if [ "$ODOO_VERSION" -le "10.0" ]; then
+        pip install --user $args --editable $src
+    fi
+    if [ "$ODOO_VERSION" -ge "11.0" ]; then
+        pip3 install --user $args --editable $src
+    fi
 
     # Make version 8.0 and 9.0 have an `odoo` executable
     if [ "$ODOO_VERSION" == "8.0" -o "$ODOO_VERSION" == "9.0" ]; then
-        ln -s $dst.py $dst
+        ln -s $src/odoo.py $dst/start_odoo
+    else
+        ln -s $src/odoo-bin $dst/start_odoo
     fi
 else
     log WARNING Blindly symlinking odoo executable
-    bin=$src/odoo-bin
     if [ "$ODOO_VERSION" == "8.0" -o "$ODOO_VERSION" == "9.0" ]; then
-        bin=$src/odoo.py
-        ln -s /opt/odoo/custom/src/odoo/openerp-{gevent,server} /usr/local/bin/
+        ln -s $src/openerp-gevent $dst/
+        ln -s $src/openerp-server $dst/
+        ln -s $src/odoo.py $dst/start_odoo
+    else
+        ln -s $src/odoo-bin $dst/start_odoo
     fi
-    ln -s $bin $dst
 fi

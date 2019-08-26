@@ -1,3 +1,0 @@
-#!/bin/bash
-set -ex
-ln -s brokenpath auto/addons/dummy_addon

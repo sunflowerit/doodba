@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+if [ "$COMPILE" != true ]; then
+    log WARNING Not compiling Python code
+    exit 0
+fi
+
+log INFO Compiling all Python code in $ODOO_WORK_DIR
+if [ "$ODOO_VERSION" -le "11.0" ]; then
+    python -m compileall -q $ODOO_WORK_DIR
+else
+    python3 -m compileall -q $ODOO_WORK_DIR
+fi
+
