@@ -11,10 +11,10 @@ if [ "$PIP_INSTALL_ODOO" == true ]; then
     if [ "$ODOO_VERSION" == "8.0" ]; then
         args="$args --no-deps"
     fi
-    if [ "$ODOO_VERSION" -le "10.0" ]; then
+    if [ "$ODOO_VERSION" == "8.0" -o "$ODOO_VERSION" == "9.0" -o "$ODOO_VERSION" == "10.0" ]; then
         pip install --user $args --editable $src
     fi
-    if [ "$ODOO_VERSION" -ge "11.0" ]; then
+    if [ "$ODOO_VERSION" == "11.0" -o "$ODOO_VERSION" == "12.0" ]; then
         pip3 install --user $args --editable $src
     fi
 
