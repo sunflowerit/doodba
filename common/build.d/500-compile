@@ -7,7 +7,7 @@ if [ "$COMPILE" != true ]; then
 fi
 
 log INFO Compiling all Python code in $ODOO_WORK_DIR
-if [ "$ODOO_VERSION" == "12.0" ]; then
+if [ "$ODOO_VERSION" == "11.0" -o "$ODOO_VERSION" == "12.0" ]; then
     python3 -m compileall -q $ODOO_WORK_DIR
 else
     python -m compileall -q $ODOO_WORK_DIR
