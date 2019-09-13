@@ -1,2 +1,13 @@
 .vscode
 **.pyc
+*.pyo
+common/entrypoint
+common/build
+custom/src/*
+!custom/src/addons.yaml
+!custom/src/repos.yaml
+auto/*
+odoo-variables
+logfile
+qa/*
+!qa/insider
