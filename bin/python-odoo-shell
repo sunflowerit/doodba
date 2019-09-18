@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+source $ODOO_WORK_DIR/odoo-variables
 export PYTHONOPTIMIZE=""  # You'll want to `assert` in your scripts
 exec odoo shell -d $PGDATABASE < "$1"

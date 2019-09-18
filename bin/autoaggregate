@@ -16,11 +16,26 @@ from doodbalib import (
     SRC_DIR,
 )
 
+# Update system varibles
+with open(os.path.join(os.environ.get("ODOO_WORK_DIR"), 'odoo-variables')) as variablesource:
+    for line in variablesource:
+        if 'export' not in line:
+            continue
+        if line.startswith('#'):
+            continue
+        if line.startswith('export PATH'):
+            continue
+        # Remove `"` and `export `
+        # then, split name / value pair
+        key, value = line.replace('"', '', 2).replace('export ', '', 1).strip().split('=', 1)
+        os.environ[key] = value
+
 UMASK = os.environ.get("UMASK")
 UID = int(os.environ.get("UID") or -1)
 GID = int(os.environ.get("GID") or -1)
 DEFAULT_REPO_PATTERN = os.environ.get("DEFAULT_REPO_PATTERN")
 DEFAULT_REPO_PATTERN_ODOO = os.environ.get("DEFAULT_REPO_PATTERN_ODOO")
+FORCE_AGGREGATE = os.environ.get("FORCE_AGGREGATE") == "true"
 
 
 def aggregate(config):
@@ -33,15 +48,26 @@ def aggregate(config):
     old_umask = None
     try:
         # Download git code with the specified umask, if any
-        if UMASK:
-            old_umask = os.umask(int(UMASK))
-        check_call(
-            ["gitaggregate", "--expand-env", "--config", config,
-             "--jobs", str(cpu_count() or 1)],
-            cwd=SRC_DIR,
-            stderr=sys.stderr,
-            stdout=sys.stdout,
-        )
+        if FORCE_AGGREGATE:
+            if UMASK:
+                old_umask = os.umask(int(UMASK))
+            check_call(
+                ["gitaggregate", "-f", "--expand-env", "--config", config,
+                 "--jobs", str(cpu_count() or 1)],
+                cwd=SRC_DIR,
+                stderr=sys.stderr,
+                stdout=sys.stdout,
+            )
+        else:
+            if UMASK:
+                old_umask = os.umask(int(UMASK))
+            check_call(
+                ["gitaggregate", "--expand-env", "--config", config,
+                 "--jobs", str(cpu_count() or 1)],
+                cwd=SRC_DIR,
+                stderr=sys.stderr,
+                stdout=sys.stdout,
+            )
     finally:
         # Restore umask, if changed
         if old_umask is not None:

@@ -1,10 +1,26 @@
 #!/usr/bin/env python
+import os
+
 from __future__ import unicode_literals
 
 import argparse
 import logging
 
 from doodbalib import LOG_LEVELS, logger
+
+# Update system varibles
+with open(os.path.join(os.environ.get("ODOO_WORK_DIR"), 'odoo-variables')) as variablesource:
+    for line in variablesource:
+        if 'export' not in line:
+            continue
+        if line.startswith('#'):
+            continue
+        if line.startswith('export PATH'):
+            continue
+        # Remove `"` and `export `
+        # then, split name / value pair
+        key, value = line.replace('"', '', 2).replace('export ', '', 1).strip().split('=', 1)
+        os.environ[key] = value
 
 parser = argparse.ArgumentParser(description="Easy logging for scripts")
 parser.add_argument("level", choices=LOG_LEVELS)

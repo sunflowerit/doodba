@@ -1,4 +1,5 @@
 #!/bin/bash
+source $ODOO_WORK_DIR/odoo-variables
 # Shortcut to run Odoo in unit testing mode
 set -e
 addons=$1

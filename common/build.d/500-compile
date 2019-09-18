@@ -1,4 +1,5 @@
 #!/bin/bash
+source $ODOO_WORK_DIR/odoo-variables
 set -e
 
 if [ "$COMPILE" != true ]; then

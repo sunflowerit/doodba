@@ -1,4 +1,5 @@
 #!/bin/bash
+source $ODOO_WORK_DIR/odoo-variables
 if [ "$UNACCENT" == true ]; then
     result="$(psql -qc 'CREATE EXTENSION IF NOT EXISTS unaccent' 2>&1)"
     ok=$?

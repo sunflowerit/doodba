@@ -1,4 +1,5 @@
 #!/bin/bash
+source $ODOO_WORK_DIR/odoo-variables
 set -e
 src=$ODOO_WORK_DIR/custom/src/odoo
 log INFO Installing Odoo from $src

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $ODOO_WORK_DIR/odoo-variables
 if [ -f  "${OPENERP_SERVER}" ]; then
     log INFO File $OPENERP_SERVER exists, skipping config generation
     exit 0
