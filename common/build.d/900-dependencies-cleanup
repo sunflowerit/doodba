@@ -6,21 +6,6 @@ import os
 from doodbalib import CUSTOM_DIR, FILE_APT_BUILD
 from doodbalib.installer import INSTALLERS
 
-# Update system varibles
-with open(os.path.join(os.environ.get("ODOO_WORK_DIR"), 'odoo-variables')) as variablesource:
-    for line in variablesource:
-        if 'export' not in line:
-            continue
-        if line.startswith('#'):
-            continue
-        if line.startswith('export PATH'):
-            continue
-        # Remove `"` and `export `
-        # then, split name / value pair
-        key, value = line.replace('"', '', 2).replace('export ', '', 1).strip().split('=', 1)
-        os.environ[key] = value
-
-
 # Build-time dependencies must be removed when finishing build
 if os.path.isfile(FILE_APT_BUILD):
     installer = INSTALLERS['apt'](FILE_APT_BUILD)

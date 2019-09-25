@@ -1,5 +1,5 @@
-#!/bin/bash
-source $ODOO_WORK_DIR/odoo-variables
+#!/usr/bin/env bash
+
 set -e
 
 if [ "$AGGREGATE" != true ]; then

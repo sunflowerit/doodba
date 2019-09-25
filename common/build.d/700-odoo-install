@@ -1,5 +1,4 @@
-#!/bin/bash
-source $ODOO_WORK_DIR/odoo-variables
+#!/usr/bin/env bash
 set -e
 src=$ODOO_WORK_DIR/custom/src/odoo
 log INFO Installing Odoo from $src
@@ -11,22 +10,17 @@ if [ "$PIP_INSTALL_ODOO" == true ]; then
     if [ "$ODOO_VERSION" == "8.0" ]; then
         args="$args --no-deps"
     fi
-    if [ "$ODOO_VERSION" == "8.0" -o "$ODOO_VERSION" == "9.0" -o "$ODOO_VERSION" == "10.0" ]; then
-        pip install --user $args --editable $src
-    fi
-    if [ "$ODOO_VERSION" == "11.0" -o "$ODOO_VERSION" == "12.0" ]; then
-        pip3 install --user $args --editable $src
-    fi
+    pip install $args --editable $src
 
     # Make version 8.0 and 9.0 have an `odoo` executable
     if [ "$ODOO_VERSION" == "8.0" -o "$ODOO_VERSION" == "9.0" ]; then
-        rm -fr $HOME/.local/bin/odoo
-        ln -s $HOME/.local/bin/odoo.py $HOME/.local/bin/odoo
+        rm -fr $ODOO_WORK_DIR/.venv/bin/odoo
+        ln -s $ODOO_WORK_DIR/.venv/bin/odoo.py $ODOO_WORK_DIR/.venv/bin/odoo
     fi
 else
     log WARNING Blindly symlinking odoo executable
     if [ "$ODOO_VERSION" == "8.0" -o "$ODOO_VERSION" == "9.0" ]; then
-        rm -fr $HOME/.local/bin/odoo
-        ln -s $HOME/.local/bin/odoo.py $HOME/.local/bin/odoo
+        rm -fr $ODOO_WORK_DIR/.venv/bin/odoo
+        ln -s $ODOO_WORK_DIR/.venv/bin/odoo.py $ODOO_WORK_DIR/.venv/bin/odoo
     fi
 fi

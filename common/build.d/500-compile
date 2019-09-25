@@ -1,5 +1,4 @@
-#!/bin/bash
-source $ODOO_WORK_DIR/odoo-variables
+#!/usr/bin/env bash
 set -e
 
 if [ "$COMPILE" != true ]; then
@@ -8,9 +7,6 @@ if [ "$COMPILE" != true ]; then
 fi
 
 log INFO Compiling all Python code in $ODOO_WORK_DIR
-if [ "$ODOO_VERSION" == "11.0" -o "$ODOO_VERSION" == "12.0" ]; then
-    python3 -m compileall -q $ODOO_WORK_DIR
-else
-    python -m compileall -q $ODOO_WORK_DIR
-fi
+python -m compileall -q $ODOO_WORK_DIR
+
 

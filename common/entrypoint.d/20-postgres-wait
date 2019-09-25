@@ -1,5 +1,4 @@
-#!/bin/bash
-source $ODOO_WORK_DIR/odoo-variables
+#!/usr/bin/env bash
 if [ "$WAIT_DB" != true ]; then
     log INFO Not waiting for a postgres server
     exit 0
