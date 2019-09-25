@@ -34,8 +34,8 @@ cd "$(dirname "$0")" && $HOME/.local/bin/pipenv install
 
 ln -sf $(cd "$(dirname "$0")" && pwd)/bin/direxec $(cd "$(dirname "$0")" && pwd)/common/build
 ln -sf $(cd "$(dirname "$0")" && pwd)/bin/direxec $(cd "$(dirname "$0")" && pwd)/common/entrypoint
-ln -sf $(cd "$(dirname "$0")" && pwd)/lib/doodbalib $(cd "$(dirname "$0")" && pwd)/.venv/local/lib/*/site-packages/doodbalib
-ln -sf $(cd "$(dirname "$0")" && pwd)/lib/doodbalib $(cd "$(dirname "$0")" && pwd)/.venv/local/lib/*/site-packages/odoobaselib
+ln -sf $(cd "$(dirname "$0")" && pwd)/lib/doodbalib $(cd "$(dirname "$0")" && pwd)/.venv/lib/*/site-packages/
+ln -sf $(cd "$(dirname "$0")" && pwd)/lib/doodbalib $(cd "$(dirname "$0")" && pwd)/.venv/lib/*/site-packages/
 ln -sf $(cd "$(dirname "$0")" && pwd)/bin/* $(cd "$(dirname "$0")" && pwd)/.venv/bin/
 # set permissions
 chmod 750 $(cd "$(dirname "$0")" && pwd)
