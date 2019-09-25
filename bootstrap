@@ -37,8 +37,6 @@ ln -sf $(cd "$(dirname "$0")" && pwd)/bin/direxec $(cd "$(dirname "$0")" && pwd)
 ln -sfT $(cd "$(dirname "$0")" && pwd)/lib/doodbalib $(cd "$(dirname "$0")" && pwd)/.venv/local/lib/python2.7/site-packages/doodbalib
 ln -sfT $(cd "$(dirname "$0")" && pwd)/lib/doodbalib $(cd "$(dirname "$0")" && pwd)/.venv/local/lib/python2.7/site-packages/odoobaselib
 ln -sf $(cd "$(dirname "$0")" && pwd)/bin/* $(cd "$(dirname "$0")" && pwd)/.venv/bin/
-# Fix script shebang
-sed -i 's|^#!.*|#!'$(cd "$(dirname "$0")" && pwd)'\/bin\/python-odoo-shell|g'  $(cd "$(dirname "$0")" && pwd)/bin/autoupdate
 # set permissions
 chmod 750 $(cd "$(dirname "$0")" && pwd)
 chmod 600 $(cd "$(dirname "$0")" && pwd)/.env

@@ -1,4 +1,4 @@
-#!/usr/local/bin/python-odoo-shell
+#!/usr/bin/env python-odoo-shell
 import logging
 import os
 
