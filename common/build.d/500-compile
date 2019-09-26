@@ -7,6 +7,6 @@ if [ "$COMPILE" != true ]; then
 fi
 
 log INFO Compiling all Python code in $ODOO_WORK_DIR
-python -m compileall -q $ODOO_WORK_DIR
+python -m compileall -q $ODOO_WORK_DIR/custom
 
 
