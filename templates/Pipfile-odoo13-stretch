@@ -1,0 +1,20 @@
+watchdog = "==0.9.0"
+soupsieve = "==1.9.3"
+beautifulsoup4 = "==4.8.0"
+bs4 = "==0.0.1"
+phonenumbers = "==8.10.19"
+libxml2-python3 = "==2.9.5"
+click-odoo-contrib = {git = "https://github.com/acsone/click-odoo-contrib.git",ref = "master"}
+Babel = "==2.3.4"
+Jinja2 = "==2.10.1"
+Mako = "==1.0.4"
+MarkupSafe = "==0.23"
+Pillow = "==4.0.0"
+PyPDF2 = "==1.26.0"
+Werkzeug = "==0.14.1"
+XlsxWriter = "==0.9.3"
+pg_activity = "==1.5.0"
+websocket_client = "==0.56.0"
+
+[requires]
+python_version = "3.5"
