@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=ubuntu
 WorkingDirectory=/home/ubuntu/odoo
-ExecStart=/home/ubuntu/.local/bin/pipenv run /home/ubuntu/odoo/.venv/bin/odoo --logfile /home/ubuntu/odoo/logfile/odoo.log -c /home/ubuntu/odoo/auto/odoo.conf
+ExecStart=/home/ubuntu/odoo/.venv/bin/python /home/ubuntu/odoo/.venv/bin/odoo --logfile /home/ubuntu/odoo/logfile/odoo.log -c /home/ubuntu/odoo/auto/odoo.conf
 KillMode=mixed
 
 [Install]
