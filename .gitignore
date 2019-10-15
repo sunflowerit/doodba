@@ -20,6 +20,6 @@ qa/*
 qa/artifacts/*
 !qa/artifacts/.gitkeep
 !qa/insider
-.env
+.envrc
 .venv
 Pipfile.lock
