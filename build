@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cd "$(dirname "$0")" && /usr/bin/direnv exec . /bin/bash -c '$HOME/.local/bin/pipenv run ./common/build && $HOME/.local/bin/pipenv run ./common/entrypoint'

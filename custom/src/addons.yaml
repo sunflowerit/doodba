@@ -1,0 +1,6 @@
+---
+OCA/reporting-engine:
+    - "*"
+
+OCA/flexicon-addons:
+    - "*"

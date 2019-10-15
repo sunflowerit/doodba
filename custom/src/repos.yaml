@@ -1,0 +1,14 @@
+---
+OCA/reporting-engine:
+  remotes:
+    origin: git@github.com:OCA/reporting-engine.git
+  target: origin 12.0
+  merges:
+    - origin 12.0
+
+OCA/flexicon-addons:
+  remotes:
+    origin: git@sfithub.com:flexicon/flexicon-addons.git.git
+  target: origin 12.0
+  merges:
+    - origin 12.0
