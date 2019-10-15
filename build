@@ -2,6 +2,8 @@
   
 . $(cd "$(dirname "$0")" && pwd)/.venv/bin/activate
 
+/bin/bash -c "$(/bin/ls -1 ./custom/src | grep -Ev 'private|repos.yaml|addons.yaml' | /usr/bin/awk '{print("rm -fr ./custom/src/" $1)}')"
+
 pip install -r requirements.txt
 
 cd "$(dirname "$0")" && /usr/bin/direnv exec . /bin/bash -c './common/build && ./common/entrypoint'
