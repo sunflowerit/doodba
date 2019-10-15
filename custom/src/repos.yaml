@@ -6,9 +6,9 @@ OCA/reporting-engine:
   merges:
     - origin 12.0
 
-OCA/flexicon-addons:
+flexicon/flexicon-addons:
   remotes:
-    origin: git@sfithub.com:flexicon/flexicon-addons.git.git
+    origin: git@sfithub.com:flexicon/flexicon-addons.git
   target: origin 12.0
   merges:
     - origin 12.0
