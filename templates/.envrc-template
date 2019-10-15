@@ -1,3 +1,12 @@
+# Odoo configuration variables
+ADMIN_PASSWORD="password"
+PGDATABASE="odoodatabase"
+PGHOST="localhost"
+PGPASSWORD=""
+PGUSER=""
+INITIAL_LANG="nl_NL"
+UNACCENT="false"
+
 # Doodba configuration variables
 export AGGREGATE="true"
 export CLEAN="true"
@@ -8,7 +17,7 @@ export DEPTH_DEFAULT="1"
 export DEPTH_MERGE="100"
 export FORCE_AGGREGATE="true"
 export LOG_LEVEL="INFO"
-export ODOO_VERSION="8.0"
+export ODOO_VERSION="12.0"
 export ODOO_WORK_DIR="$(pwd)"
 export PIP_INSTALL_ODOO="true"
 export PTVSD_ARGS="--host 0.0.0.0 --port 6899 --wait --multiprocess"

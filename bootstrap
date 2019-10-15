@@ -1,14 +1,4 @@
 #!/bin/sh
-  
-if [ ! -f $HOME/.local/bin/pipenv ]; then
-    echo 'pipenv python pip package does not installed, Install it by running:'
-    echo 'pip install pipenv --user'
-    echo 'then add this line to $HOME/.bashrc:'
-    echo 'export PATH="${HOME}/.local/bin:$PATH"'
-    echo 'then issue this command:'
-    echo 'source $HOME/.bashrc'
-    exit 0
-fi
 
 if [ ! -f /usr/bin/direnv ]; then
     echo 'direnv apt package does not installed, Install it by running:'
@@ -17,14 +7,6 @@ if [ ! -f /usr/bin/direnv ]; then
     echo 'eval "$(direnv hook bash)"'
     echo 'then issue this command:'
     echo 'source $HOME/.bashrc'
-    exit 0
-fi
-
-if [ ! -f $(cd "$(dirname "$0")" && pwd)/.env ]; then
-    echo "$(cd "$(dirname "$0")" && pwd)/.env file not found!"
-    echo "Create it by running:"
-    echo "Copy it from $(cd "$(dirname "$0")" && pwd)/templates/"
-    echo "Then use your favorite editor to edit things like: Postgres database password, etc."
     exit 0
 fi
 
@@ -42,15 +24,18 @@ if [ ! -f $(cd "$(dirname "$0")" && pwd)/common/conf.d/odoo.cfg ]; then
     exit 0
 fi
 
-if [ ! -f $(cd "$(dirname "$0")" && pwd)/Pipfile ]; then
-    echo "$(cd "$(dirname "$0")" && pwd)/Pipfile file not found!"
+if [ ! -f $(cd "$(dirname "$0")" && pwd)/requirements.txt ]; then
+    echo "$(cd "$(dirname "$0")" && pwd)/requirements.txt file not found!"
     echo "Copy it from $(cd "$(dirname "$0")" && pwd)/templates/"
     exit 0
 fi
 
 if [ ! -d $(cd "$(dirname "$0")" && pwd)/.venv ]; then
-    export PIPENV_VENV_IN_PROJECT="enabled"
-    cd "$(dirname "$0")" && $HOME/.local/bin/pipenv install
+    if [ $(echo $ODOO_VERSION | cut -d '.' -f1) -le 10 ]; then
+        python2 -m virtualenv $(cd "$(dirname "$0")" && pwd)/.venv
+    else
+        python3 -m virtualenv $(cd "$(dirname "$0")" && pwd)/.venv
+    fi
 fi
 
 ln -sf $(cd "$(dirname "$0")" && pwd)/bin/direxec $(cd "$(dirname "$0")" && pwd)/common/build
@@ -82,11 +67,10 @@ chmod 740 $(cd "$(dirname "$0")" && pwd)/lib/doodbalib/*
 chmod 750 $(cd "$(dirname "$0")" && pwd)/qa
 chmod 750 $(cd "$(dirname "$0")" && pwd)/qa/artifacts
 chmod 640 $(cd "$(dirname "$0")" && pwd)/templates/*
-chmod -f 600 $(cd "$(dirname "$0")" && pwd)/.env
 chmod -f 600 $(cd "$(dirname "$0")" && pwd)/.envrc
 chmod 740 $(cd "$(dirname "$0")" && pwd)/bootstrap
 chmod 740 $(cd "$(dirname "$0")" && pwd)/build
 chmod 740 $(cd "$(dirname "$0")" && pwd)/install
-chmod -f 600 $(cd "$(dirname "$0")" && pwd)/Pipfile
-chmod -f 600 $(cd "$(dirname "$0")" && pwd)/Pipfile.lock
+chmod 640 $(cd "$(dirname "$0")" && pwd)/requirements.txt
 chmod 740 $(cd "$(dirname "$0")" && pwd)/run
+
