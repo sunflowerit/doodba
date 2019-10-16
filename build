@@ -1,6 +1,9 @@
 #!/bin/sh
-  
-. $(cd "$(dirname "$0")" && pwd)/.venv/bin/activate
+
+SCRIPT_PATH=$(cd "$(dirname "$0")" && pwd)
+cd $SCRIPT_PATH
+
+. $SCRIPT_PATH/.venv/bin/activate
 
 rm -fr ./auto/odoo.conf
 rm -fr ./auto/addons/*
@@ -8,6 +11,8 @@ rm -fr ./auto/addons/*
 
 pip install -r requirements.txt
 
-cd "$(dirname "$0")" && /usr/bin/direnv exec . /bin/bash -c './common/build && ./common/entrypoint'
+cd "$(dirname "$0")" && /usr/bin/direnv exec . /bin/bash -c './common/build'
+cd $SCRIPT_PATH
+cd "$(dirname "$0")" && /usr/bin/direnv exec . /bin/bash -c './common/entrypoint'
 
 deactivate
