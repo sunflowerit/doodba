@@ -1,8 +1,5 @@
 #!/bin/sh
 
 cd "$(dirname "$0")"
-. ./.venv/bin/activate
 
-/usr/bin/direnv exec . /bin/bash -c 'odoo -i base -c ./auto/odoo.conf --without-demo=all --stop-after-init -d $PGDATABASE'
-
-deactivate
+/usr/bin/direnv exec . /bin/bash -c '$HOME/.local/bin/pipenv run odoo -i base -c ./auto/odoo.conf --without-demo=all --stop-after-init'
