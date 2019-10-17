@@ -86,6 +86,7 @@ chmod -f 600 $(cd "$(dirname "$0")" && pwd)/.env
 chmod -f 600 $(cd "$(dirname "$0")" && pwd)/.envrc
 chmod 740 $(cd "$(dirname "$0")" && pwd)/bootstrap
 chmod 740 $(cd "$(dirname "$0")" && pwd)/build
+chmod 740 $(cd "$(dirname "$0")" && pwd)/initial-database
 chmod 740 $(cd "$(dirname "$0")" && pwd)/install
 chmod -f 600 $(cd "$(dirname "$0")" && pwd)/Pipfile
 chmod -f 600 $(cd "$(dirname "$0")" && pwd)/Pipfile.lock
