@@ -70,6 +70,7 @@ chmod 640 $(cd "$(dirname "$0")" && pwd)/templates/*
 chmod -f 600 $(cd "$(dirname "$0")" && pwd)/.envrc
 chmod 740 $(cd "$(dirname "$0")" && pwd)/bootstrap
 chmod 740 $(cd "$(dirname "$0")" && pwd)/build
+chmod 740 $(cd "$(dirname "$0")" && pwd)/initial-database
 chmod 740 $(cd "$(dirname "$0")" && pwd)/install
 chmod 640 $(cd "$(dirname "$0")" && pwd)/requirements.txt
 chmod 740 $(cd "$(dirname "$0")" && pwd)/run
