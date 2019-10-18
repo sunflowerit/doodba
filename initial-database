@@ -1,8 +1,9 @@
 #!/bin/sh
 
 cd "$(dirname "$0")"
+. ./.envrc
 . ./.venv/bin/activate
 
-/usr/bin/direnv exec . /bin/bash -c 'odoo -i base -c ./auto/odoo.conf --without-demo=all --stop-after-init -d $PGDATABASE'
+odoo -i base -c ./auto/odoo.conf --without-demo=all --stop-after-init -d $PGDATABASE
 
 deactivate
