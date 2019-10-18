@@ -21,7 +21,6 @@ UID = int(os.environ.get("UID") or -1)
 GID = int(os.environ.get("GID") or -1)
 DEFAULT_REPO_PATTERN = os.environ.get("DEFAULT_REPO_PATTERN")
 DEFAULT_REPO_PATTERN_ODOO = os.environ.get("DEFAULT_REPO_PATTERN_ODOO")
-FORCE_AGGREGATE = os.environ.get("FORCE_AGGREGATE") == "true"
 
 
 def aggregate(config):
@@ -34,26 +33,15 @@ def aggregate(config):
     old_umask = None
     try:
         # Download git code with the specified umask, if any
-        if FORCE_AGGREGATE:
-            if UMASK:
-                old_umask = os.umask(int(UMASK))
-            check_call(
-                ["gitaggregate", "-f", "--expand-env", "--config", config,
-                 "--jobs", str(cpu_count() or 1)],
-                cwd=SRC_DIR,
-                stderr=sys.stderr,
-                stdout=sys.stdout,
-            )
-        else:
-            if UMASK:
-                old_umask = os.umask(int(UMASK))
-            check_call(
-                ["gitaggregate", "--expand-env", "--config", config,
-                 "--jobs", str(cpu_count() or 1)],
-                cwd=SRC_DIR,
-                stderr=sys.stderr,
-                stdout=sys.stdout,
-            )
+        if UMASK:
+            old_umask = os.umask(int(UMASK))
+        check_call(
+            ["gitaggregate", "--expand-env", "--config", config,
+             "--jobs", str(cpu_count() or 1)],
+            cwd=SRC_DIR,
+            stderr=sys.stderr,
+            stdout=sys.stdout,
+        )
     finally:
         # Restore umask, if changed
         if old_umask is not None:
