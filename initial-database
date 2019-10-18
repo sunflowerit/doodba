@@ -1,5 +1,6 @@
 #!/bin/sh
 
 cd "$(dirname "$0")"
+. ./.envrc
 
-/usr/bin/direnv exec . /bin/bash -c '$HOME/.local/bin/pipenv run odoo -i base -c ./auto/odoo.conf --without-demo=all --stop-after-init'
+$HOME/.local/bin/pipenv run odoo -i base -c ./auto/odoo.conf --without-demo=all --stop-after-init
