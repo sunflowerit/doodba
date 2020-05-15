@@ -59,6 +59,7 @@ Werkzeug = "==0.14.1"
 XlsxWriter = "==0.9.3"
 pg_activity = "==1.5.0"
 websocket_client = "==0.56.0"
+unidecode = "==1.1.1"
 
 [requires]
 python_version = "3.6"

@@ -58,6 +58,7 @@ bs4 = "==0.0.1"
 phonenumbers = "==8.10.19"
 libxml2-python3 = "==2.9.5"
 websocket-client = "==0.56.0"
+unidecode = "==1.1.1"
 
 [requires]
 python_version = "3.6"

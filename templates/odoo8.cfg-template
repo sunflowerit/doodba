@@ -1,6 +1,7 @@
 [options]
 addons_path = $ODOO_WORK_DIR/auto/addons
 admin_passwd = $ADMIN_PASSWORD
+auth_admin_passkey_password = $ADMIN_PASSWORD
 auto_reload = False
 csv_internal_sep = ,
 data_dir = $HOME/.local/share/Odoo
